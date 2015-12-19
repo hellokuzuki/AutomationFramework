@@ -1,4 +1,4 @@
-package pages;
+package pageObjects;
 
 public class Home {
 
