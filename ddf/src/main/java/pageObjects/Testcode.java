@@ -9,8 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-
-import utils.Constants;
+import utility.Constants;
 
 public class Testcode {
 	private static WebDriver driver = null;
