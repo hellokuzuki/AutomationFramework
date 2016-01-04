@@ -26,11 +26,11 @@ public class Testcode {
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		driver.get(Constants.URL);
-	    driver.findElement(By.xpath(Home.xpath_Login_Btn)).click();
-	    driver.findElement(By.id(Login.id_Id_TextField)).sendKeys(sUsername);
-	    driver.findElement(By.id(Login.id_Pwd_TextField)).sendKeys(sPassword);
-	    driver.findElement(By.id(Login.id_Login_Btn)).click();
-	    driver.findElement(By.xpath(Home.xpath_Logout_Btn)).click();
+	    driver.findElement(By.xpath(Home_Page.xpath_Login_Btn)).click();
+	    driver.findElement(By.id(Login_Page.id_Id_TextField)).sendKeys(sUsername);
+	    driver.findElement(By.id(Login_Page.id_Pwd_TextField)).sendKeys(sPassword);
+	    driver.findElement(By.id(Login_Page.id_Login_Btn)).click();
+	    driver.findElement(By.xpath(Home_Page.xpath_Logout_Btn)).click();
 	    driver.quit();
 	}
 }

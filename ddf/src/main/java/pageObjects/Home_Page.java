@@ -1,6 +1,6 @@
 package pageObjects;
 
-public class Home {
+public class Home_Page {
 
 	//Login button xpath.
 	public static String xpath_Login_Btn = ".//*[@id='account']/a";

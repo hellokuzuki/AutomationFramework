@@ -1,6 +1,6 @@
 package pageObjects;
 
-public class Login {
+public class Login_Page {
 
 	//User name element id
 	public static String id_Id_TextField = "log";
