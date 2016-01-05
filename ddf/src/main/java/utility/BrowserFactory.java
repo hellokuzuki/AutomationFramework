@@ -2,6 +2,7 @@ package utility;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -73,6 +74,22 @@ public class BrowserFactory {
 			System.out.print("*******Please check your browser setting!*******");
 			break;
 		}
+
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
+	}
+
+	// public static void quit() {
+	// if (driver != null) {
+	// driver.quit();
+	// }
+	// }
+
+	public static void closeAllDriver() {
+		for (String key : drivers.keySet()) {
+			drivers.get(key).close();
+			drivers.get(key).quit();
+		}
 	}
 }
