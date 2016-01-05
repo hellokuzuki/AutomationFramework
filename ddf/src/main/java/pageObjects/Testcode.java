@@ -5,14 +5,14 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import utility.Constants;
+import utility.BrowserFactory;
 
 public class Testcode {
-	private static WebDriver driver = null;
+	private static WebDriver driver = BrowserFactory.getBrowser("Chrome");
 	
 	//Define DateProvider.
 	@DataProvider(name = "Authentication")
@@ -23,7 +23,7 @@ public class Testcode {
 	@Test(dataProvider = "Authentication")
 	public void test(String sUsername, String sPassword) {
 		
-		driver = new FirefoxDriver();
+//		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		driver.get(Constants.URL);
 	    driver.findElement(By.xpath(Home_Page.xpath_Login_Btn)).click();
@@ -31,6 +31,8 @@ public class Testcode {
 	    driver.findElement(By.id(Login_Page.id_Pwd_TextField)).sendKeys(sPassword);
 	    driver.findElement(By.id(Login_Page.id_Login_Btn)).click();
 	    driver.findElement(By.xpath(Home_Page.xpath_Logout_Btn)).click();
-	    driver.quit();
+//	    driver.quit();
 	}
+	
+	 
 }
