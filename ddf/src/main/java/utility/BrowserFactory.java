@@ -54,7 +54,7 @@ public class BrowserFactory {
 							System.getProperty("user.dir") + "\\WebDrivers\\chromedriver\\chromedriver.exe");
 				} else if ("Mac" == OS) {
 					System.setProperty("webdriver.chrome.driver",
-							System.getProperty("user.dir") + "\\WebDrivers\\chromedriver\\chromedriver");
+							System.getProperty("user.dir") + "/WebDrivers/chromedriver/chromedriver");
 				} else {
 					System.out.println("*******Please check your OS version!*******");
 				}
