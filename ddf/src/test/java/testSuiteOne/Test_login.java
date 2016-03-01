@@ -11,7 +11,7 @@ import utility.BrowserFactory;
 import pageObjects.Home_Page;
 import pageObjects.Login_Page;
 
-public class Test_login {
+public class Test_Login {
 
 	private static WebDriver driver;
 
