@@ -2,14 +2,17 @@
 
 	import static org.junit.Assert.*;
 
-	import java.util.Arrays;
+import java.util.Arrays;
+//	import java.util.Arrays;
 	import java.util.List;
 
 	import org.junit.AfterClass;
 	import org.junit.BeforeClass;
-	import org.junit.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 	import org.openqa.selenium.By;
-	import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.JavascriptExecutor;
+//	import org.openqa.selenium.JavascriptExecutor;
 	import org.openqa.selenium.WebDriver;
 	import org.openqa.selenium.WebElement;
 
@@ -116,22 +119,23 @@
 			assertEquals("abcde", focus.getAttribute("value"));
 		}
 		
-//		@Test
-//		public void testFindElementUsingJQuerySelector() {
-//			driver.get("http://cookbook.seleniumacademy.com/Locators.html");
-//			
-//			List<String> checked = Arrays.asList("user128_admin", "user220_browser");
-//			
-//			JavascriptExecutor js = (JavascriptExecutor) driver;
-//			
-//			@SuppressWarnings("unchecked")
-//			List<WebElement> elements = (List<WebElement>) js.executeScript("return jQuery.find(':unchecked')");
-//			assertEquals(2, elements.size());
-//			
-//			for(WebElement element : elements){
-//				assertTrue(checked.contains(element.getAttribute("id")));
-//				System.out.println(element.getAttribute("id").toString());
-//			}
-//		}
+		@Ignore
+		@Test
+		public void testFindElementUsingJQuerySelector() {
+			driver.get("http://cookbook.seleniumacademy.com/Locators.html");
+			
+			List<String> checked = Arrays.asList("user128_admin", "user220_browser");
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			
+			@SuppressWarnings("unchecked")
+			List<WebElement> elements = (List<WebElement>) js.executeScript("return jQuery.find(':unchecked')");
+			assertEquals(2, elements.size());
+			
+			for(WebElement element : elements){
+				assertTrue(checked.contains(element.getAttribute("id")));
+				System.out.println(element.getAttribute("id").toString());
+			}
+		}
 
 	}
