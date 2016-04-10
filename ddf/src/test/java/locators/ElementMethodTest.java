@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -23,24 +23,34 @@ public class ElementMethodTest {
 	private static WebDriver driver;
 
 	@BeforeClass
-	public static void setUp() throws Exception {
-		System.out.println("### SET UP ###");
+	public static void setUpBeforeClass() throws Exception {
 		driver = BrowserFactory.getBrowser("Chrome");
-//		driver.get("http://www.davidjones.com.au");
+		System.out.println("### SET UP BEFORE CLASS ###");
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		System.out.println("### SET UP EACH TEST ###");
+		driver.get("http://www.davidjones.com.au");
 
 	}
 
+	@After
+	public void tearDown() throws Exception {
+		System.out.println("### TEAR DOWN EACH TEST ###");
+	}
+	
 	@AfterClass
-	public static void tearDown() throws Exception {
-		driver.close();
+	public static void tearDownAfterClass() throws Exception {
 		driver.quit();
-		System.out.println("### TEAR DOWN ###");
+		System.out.println("### TEAR DOWN AFTER CLASS###");
 	}
 
-	@Ignore
 	@Test
 	public void textClearTest() {
 		WebElement loginButton = driver.findElement(By.id("headerLogin"));
+		
+		//click an elemnet
 		loginButton.click();
 		
 		WebElement userName = driver.findElement(By.name("logonId"));
@@ -50,8 +60,10 @@ public class ElementMethodTest {
 		userName.sendKeys("abcdef");
 		assertEquals("abcdef", userName.getAttribute("value"));
 		
+		//input text
 		passWord.sendKeys("111111");
 
+		//clear text
 		userName.clear();
 		assertEquals("", userName.getAttribute("value"));
 		
@@ -62,30 +74,39 @@ public class ElementMethodTest {
 		
 		passWord.sendKeys("111111");
 		
+		//submit
 		form.submit();
 		
 		assertEquals("My Account", driver.getTitle());
+		
+//		logout
+		driver.findElement(By.cssSelector("#user-cart > p > a")).click();
+		
+		
 	}
 	
-	@Ignore
 	@Test
 	public void getTextTest(){
 		WebElement logo = driver.findElement(By.xpath("//*[@id=\"header\"]/div[1]/a"));
 		assertEquals("David Jones", logo.getText());
 		
-		//Get hiden text from element
+		//Get hidden text from element
 		WebElement hidenText = driver.findElement(By.xpath("//*[@id=\"MiniCartFocusReceiver2\"]/p"));
 		System.out.println(hidenText.getAttribute("innerText"));
-//		System.out.println(hidenText.getText());
+		
+		WebElement inner = driver.findElement(By.className("cart-empty-message"));
+		assertEquals("Your shopping bag is empty.", inner.getAttribute("innerText"));
 	}
-	@Ignore
+	
 	@Test
 	public void getCssValueTest(){
 		WebElement logo = driver.findElement(By.xpath("//*[@id=\"header\"]/div[1]"));
 		assertEquals("940px", logo.getCssValue("width"));
+		
+		WebElement span = driver.findElement(By.linkText("Sale"));
+		System.out.println(span.getCssValue("color"));
 	}
 	
-	@Ignore
 	@Test
 	public void dropDownListTest(){
 		
@@ -128,9 +149,10 @@ public class ElementMethodTest {
 			System.out.println(list.getText());
 		}
 		
+//		logout
+		driver.findElement(By.cssSelector("#user-cart > p > a")).click();
 	}
 	
-	@Ignore
 	@Test
 	public void checkingSelectedOptionTest(){
 		
@@ -165,9 +187,11 @@ public class ElementMethodTest {
 		
 		assertArrayEquals(expectList.toArray(), actualList.toArray());
 		
+//		logout
+		driver.findElement(By.cssSelector("#user-cart > p > a")).click();
+		
 	}
 	
-	@Ignore
 	@Test
 	public void radioButtonAndGroupTest(){
 		driver.get("http://cookbook.seleniumacademy.com/Config.html");
@@ -182,18 +206,17 @@ public class ElementMethodTest {
 		
 		List<WebElement> radios = driver.findElements(By.name("fuel_type"));
 		
-		for(WebElement ra : radios) {
-			if(ra.getAttribute("value").equals("Diesel")) {
-				if(!ra.isSelected()) {
-					ra.click();
+		for(WebElement radio : radios) {
+			if(radio.getAttribute("value").equals("Diesel")) {
+				if(!radio.isSelected()) {
+					radio.click();
 				}
-				assertTrue(ra.isSelected());
+				assertTrue(radio.isSelected());
 				break;
 			}
 		}
 	}
 	
-	@Ignore
 	@Test
 	public void checkBoxsTest(){
 		WebElement loginButton = driver.findElement(By.id("headerLogin"));
@@ -221,12 +244,15 @@ public class ElementMethodTest {
 			checkbox.click();
 		}
 		System.out.println(checkbox.isSelected());
-//		assertTrue(checkbox.isSelected());
+		assertTrue(checkbox.isSelected());
 		
 		if(checkbox.isSelected()) {
 			checkbox.click();
 		}
-//		assertFalse(checkbox.isSelected());
+		assertFalse(checkbox.isSelected());
+		
+//		logout
+		driver.findElement(By.cssSelector("#user-cart > p > a")).click();
 		
 	}
 	
