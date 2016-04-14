@@ -1,18 +1,17 @@
 package selniumAPI;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import utility.BrowserFactory;
+import utils.Listener;
 
-public class CookiesTest {
+public class WebDriverEventsTest {
 
 	private static WebDriver driver;
 
@@ -43,11 +42,14 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void testCookies() {
-		Cookie cookie = driver.manage().getCookieNamed("yieldify_visit");
+	public void test() {
+		EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
 		
-		assertEquals("1", cookie.getValue());
+		Listener myListener = new Listener();
+		
+		eventDriver.register(myListener);
+		
+		eventDriver.get("http://www.google.com");
 	}
-
 
 }
