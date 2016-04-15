@@ -61,7 +61,7 @@ public class FluentWaitTest {
 			       .ignoring(NoSuchElementException.class)
 			       .ignoring(TimeoutException.class);
 		
-		WebElement contact = wait.until(
+		wait.until(
 				new Function<WebDriver, WebElement>(){
 					public WebElement apply(WebDriver d){
 						return d.findElement(By.id("invalid"));
@@ -89,7 +89,7 @@ public class FluentWaitTest {
 //			       .ignoring(NoSuchElementException.class)
 			       .ignoring(TimeoutException.class);
 		
-		WebElement contact = wait.until(
+		wait.until(
 				new Function<WebDriver, WebElement>(){
 					public WebElement apply(WebDriver d){
 						return d.findElement(By.id("invalid"));
