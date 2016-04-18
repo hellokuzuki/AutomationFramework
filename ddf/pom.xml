@@ -55,6 +55,13 @@
 			<version>3.13</version>
 		</dependency>
 
+		<!-- A simple library for reading and writing CSV in Java. -->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>3.7</version>
+		</dependency>
+
 		<!-- Apache Log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
