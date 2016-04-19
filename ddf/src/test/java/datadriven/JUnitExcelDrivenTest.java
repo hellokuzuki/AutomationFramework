@@ -30,13 +30,14 @@ public class JUnitExcelDrivenTest {
 	private String password;
 	
 	public JUnitExcelDrivenTest(String username, String password) {
+//		super();
 		this.username = username;
 		this.password = password;
 	}
 	
 	@Parameters
 	public static Collection <Object[]> testData() throws Exception{
-		InputStream spreadsheet = new FileInputStream("./Resource/Data/testdata.xlsx");
+		InputStream spreadsheet = new FileInputStream("./Resource/Data/testdata.xls");
 		return new SpreadsheetData(spreadsheet).getData();
 	}
 	
@@ -92,5 +93,7 @@ public class JUnitExcelDrivenTest {
 		driver.findElement(By.cssSelector("#user-cart > p > a")).click();
 		
 	}
+	
+
 
 }

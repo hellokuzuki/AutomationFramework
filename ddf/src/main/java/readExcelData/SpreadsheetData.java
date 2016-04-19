@@ -28,30 +28,38 @@ public class SpreadsheetData {
 	private Collection<Object[]> loadFromSpreadsheet(final InputStream excelFile)
 			throws IOException, InvalidFormatException {
 
+		// Creates the appropriate HSSFWorkbook / XSSFWorkbook from the given
+		// File, which must exist and be readable.
 		Workbook workbook = WorkbookFactory.create(excelFile);
 
 		data = new ArrayList<Object[]>();
+
+		// Get the first sheet.
 		Sheet sheet = workbook.getSheetAt(0);
 
+		// Get colume number of each row.
 		int numberOfColumns = countNonEmptyColumns(sheet);
+
+		// Row object array.
 		List<Object[]> rows = new ArrayList<Object[]>();
+
+		// Row data object.
 		List<Object> rowData = new ArrayList<Object>();
 
 		for (Row row : sheet) {
 			if (isEmpty(row)) {
 				break;
 			} else {
-				if (row.getRowNum() != 0) // Row 0 will be Header Row
-				{
-					rowData.clear();
-					for (int column = 0; column < numberOfColumns; column++) {
-						Cell cell = row.getCell(column);
-						rowData.add(objectFrom(workbook, cell));
-					}
-					rows.add(rowData.toArray());
+				rowData.clear();
+				for (int column = 0; column < numberOfColumns; column++) {
+					Cell cell = row.getCell(column);
+					rowData.add(objectFrom(workbook, cell));
 				}
+				rows.add(rowData.toArray());
 			}
 		}
+//		System.out.println(Arrays.deepToString(rows));//display 2d arrays
+//		System.out.println(Arrays.toString(rows.toArray()));
 		return rows;
 	}
 
@@ -87,7 +95,14 @@ public class SpreadsheetData {
 		if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
 			cellValue = cell.getRichStringCellValue().getString();
 		} else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-			cellValue = getNumericCellValue(cell);
+			
+			//Force numberic type of cell to string type.
+			cell.setCellType(Cell.CELL_TYPE_STRING);
+			cellValue = cell.getRichStringCellValue().getString();
+			
+//			numberic method
+//			cellValue = getNumericCellValue(cell);
+			
 		} else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
 			cellValue = cell.getBooleanCellValue();
 		} else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
@@ -98,6 +113,7 @@ public class SpreadsheetData {
 
 	}
 
+	@SuppressWarnings("unused")
 	private Object getNumericCellValue(final Cell cell) {
 		Object cellValue;
 		if (DateUtil.isCellDateFormatted(cell)) {
