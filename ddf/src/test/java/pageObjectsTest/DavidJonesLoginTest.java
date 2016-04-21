@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import pageObjects.DavidJones_HomePage;
+import pageObjects.DavidJones_LoginPage;
 
-public class DavidJonesHomePageTest {
+public class DavidJonesLoginTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -36,20 +36,19 @@ public class DavidJonesHomePageTest {
 	//Test basic page objective model
 	@Test
 	public void test() {
-		DavidJones_HomePage hp = new DavidJones_HomePage();
+		DavidJones_LoginPage login = new DavidJones_LoginPage();
 		
-		hp.load();
+		login.get();
 		
-		hp.text_Logo_click();
-		assertEquals(hp.get_PageTitle(),"Shop Online at David Jones - Women's Fashion - Beauty -Shoes & Accessories - Men's Fashion - Children's Fashion - Home");
-	
-		hp.link_Contact_Us_click();
+		login.InputLoginId("testuser@yopmail.com");
 		
-		assertEquals(hp.get_PageTitle(),"Contact Us - David Jones");
-		hp.back();
+		login.InputLogonPassword("111111");
 		
-		hp.close();
+		login.clickbtnSignIn();
 		
+		assertEquals("My Account",login.getPageTitle());
+		
+		login.close();
 	}
 
 }
