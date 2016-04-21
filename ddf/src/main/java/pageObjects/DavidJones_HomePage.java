@@ -2,16 +2,20 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import utility.BrowserFactory;
 
 public class DavidJones_HomePage {
 	
 	private WebDriver driver;
+	private String url = "http://www.davidjones.com.au";
 	
 	//Constructor
-	public DavidJones_HomePage (WebDriver driver){
-		this.driver = driver;
+	public DavidJones_HomePage (){
+		this.driver = BrowserFactory.getBrowser("Chrome");
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -27,7 +31,8 @@ public class DavidJones_HomePage {
 	private WebElement link_Wish_List;
 	
 	@FindBy(linkText = "Contact us")
-	private WebElement link_Contact_Us;
+	@CacheLookup
+	private static WebElement link_Contact_Us;
 	
 	@FindBy(id = "SimpleSearchForm_SearchTerm")
 	private WebElement input_Search_Box;
@@ -80,11 +85,19 @@ public class DavidJones_HomePage {
 	}
 	
 	public String get_PageTitle (){
-		return driver.getTitle();
+		return this.driver.getTitle();
 	}
 	
 	public void back(){
-		driver.navigate().back();
+		this.driver.navigate().back();
+	}
+	
+	public void load() {
+		this.driver.get(url);
+	}
+	
+	public void close(){
+		this.driver.quit();
 	}
 
 }
