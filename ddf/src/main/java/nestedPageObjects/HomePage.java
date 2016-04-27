@@ -17,7 +17,7 @@ public class HomePage extends LoadableComponent<HomePage>{
 	
 	static String url = "https://github.com/";
 	
-	private static String title = "GitHub"; 
+//	private static String title = "GitHub"; 
 	
 	public HomePage(WebDriver driver){
 		this.driver = driver;
