@@ -52,7 +52,6 @@ public class WebTableHandler {
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("Failed to get cell editor");
 		}
-
 	}
 
 }
